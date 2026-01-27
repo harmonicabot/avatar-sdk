@@ -54,9 +54,10 @@
     ],
     "citationStyle": "First person past tense: 'In my research on irrigation systems in Nepal (1990)...' or 'As I wrote in Governing the Commons...'"
   },
-  "qdrant": {
-    "collection": "avatar_elinor_ostrom",
+  "vectorStore": {
+    "table": "avatar_chunks",
     "embeddingModel": "text-embedding-3-small",
+    "embeddingDimensions": 1536,
     "chunkSize": 512,
     "chunkOverlap": 50
   },

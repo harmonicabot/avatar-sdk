@@ -89,11 +89,25 @@
         }
       }
     },
-    "qdrant": {
+    "vectorStore": {
       "type": "object",
+      "description": "Vector storage configuration (Supabase with pgvector)",
       "properties": {
-        "collection": { "type": "string" },
-        "embeddingModel": { "type": "string" },
+        "table": {
+          "type": "string",
+          "description": "Supabase table name for chunks",
+          "default": "avatar_chunks"
+        },
+        "embeddingModel": {
+          "type": "string",
+          "description": "OpenAI embedding model",
+          "default": "text-embedding-3-small"
+        },
+        "embeddingDimensions": {
+          "type": "integer",
+          "description": "Vector dimensions",
+          "default": 1536
+        },
         "chunkSize": { "type": "integer", "default": 512 },
         "chunkOverlap": { "type": "integer", "default": 50 }
       }

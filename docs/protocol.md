@@ -33,8 +33,8 @@ A response that draws directly from retrieved passages in the corpus, not from g
 │         │                                    │          │
 │         ▼                                    ▼          │
 │  ┌─────────────┐                    ┌─────────────────┐│
-│  │   Qdrant    │                    │   Claude API    ││
-│  │Vector Store │                    │                 ││
+│  │  Supabase   │                    │   Claude API    ││
+│  │  pgvector   │                    │                 ││
 │  └─────────────┘                    └─────────────────┘│
 └─────────────────────────────────────────────────────────┘
                             │

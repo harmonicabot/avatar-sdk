@@ -24,7 +24,7 @@ Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), Avata
 Each avatar consists of:
 
 1. **Verified Corpus** — Digitized writings, speeches, and documented positions
-2. **Vector Store** — Embeddings stored in Qdrant for semantic retrieval
+2. **Vector Store** — Embeddings stored in Supabase (pgvector) for semantic retrieval
 3. **System Prompt** — Defines how the avatar engages (tone, citation style, limitations)
 4. **MCP Server** — Standard protocol for querying the avatar
 
@@ -51,6 +51,9 @@ avatar-sdk/
 │   │
 │   └── mcp-server/              # Reference MCP server
 │       └── server.ts
+│
+├── supabase/                    # Database schema
+│   └── schema.sql
 │
 ├── avatars/                     # Official curated avatars
 │   ├── elinor-ostrom/
@@ -149,31 +152,49 @@ avatar-sdk process
 avatar-sdk serve
 ```
 
-## Data Model
+## Data Model (Supabase)
 
 ```sql
 -- Avatar definition
-avatars:
-  - id: text
-  - name: text
-  - description: text
-  - source_description: text  -- e.g., "Based on writings 1990-2012"
-  - system_prompt: text
-  - qdrant_collection: text
-  - verification_url: text    -- Public page showing all sources
-  - is_active: boolean
+create table avatars (
+  id text primary key,
+  name text not null,
+  description text,
+  expertise text[],
+  system_prompt jsonb not null,
+  is_active boolean default true,
+  is_official boolean default false
+);
 
--- Source documents (transparent)
-documents:
-  - id: text
-  - avatar_id: foreign key
-  - title: text
-  - url: text                 -- Original source
-  - content: text
-  - published_date: date
-  - source_type: enum         -- book, paper, speech, interview
-  - verification_status: enum -- verified, pending
+-- Source documents (for transparency)
+create table avatar_documents (
+  id uuid primary key,
+  avatar_id text references avatars(id),
+  title text not null,
+  url text,
+  document_type text,
+  verified boolean default false
+);
+
+-- Text chunks with embeddings
+create table avatar_chunks (
+  id uuid primary key,
+  avatar_id text references avatars(id),
+  content text not null,
+  embedding vector(1536),  -- pgvector
+  source_title text,
+  source_page int
+);
+
+-- Similarity search function
+select * from search_avatar_chunks(
+  'elinor-ostrom',
+  $query_embedding,
+  5  -- top 5 results
+);
 ```
+
+See [`supabase/schema.sql`](./supabase/schema.sql) for full schema.
 
 ## Why Start with Historical Figures?
 
@@ -190,8 +211,8 @@ documents:
 
 ## Technical Stack
 
-- **Vector Store:** Qdrant
-- **Embeddings:** OpenAI / Voyage AI
+- **Database:** Supabase (PostgreSQL + pgvector)
+- **Embeddings:** OpenAI text-embedding-3-small
 - **LLM:** Claude (Anthropic)
 - **Protocol:** MCP (Model Context Protocol)
 - **Processing:** LlamaIndex
@@ -205,7 +226,7 @@ documents:
 - Goal: Public good, grant-funded
 
 ### BYOI — Bring Your Own Infrastructure
-- You host your own Qdrant + MCP server
+- You host your own Supabase project + MCP server
 - You bring your own LLM API keys
 - Zero cost from us
 - Full control over your data

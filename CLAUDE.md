@@ -10,8 +10,8 @@ Avatar SDK implements the **Conversational Avatar Protocol (CAP)** — an open s
 
 ## Tech Stack
 
-- **Vector Store:** Qdrant
-- **Embeddings:** OpenAI text-embedding-3-small / Voyage AI
+- **Database:** Supabase (PostgreSQL + pgvector)
+- **Embeddings:** OpenAI text-embedding-3-small
 - **LLM:** Claude (Anthropic)
 - **Protocol:** MCP (Model Context Protocol)
 - **Processing:** LlamaIndex
@@ -35,6 +35,9 @@ This is a Turbo monorepo with workspaces:
   - `packages/processor/` — Corpus → embeddings pipeline (planned)
   - `packages/mcp-server/` — Reference MCP server implementation (planned)
 
+- `supabase/` — Database schema
+  - `supabase/schema.sql` — Tables for avatars, documents, chunks with pgvector
+
 - `avatars/*` — Official curated avatars
   - `avatars/elinor-ostrom/` — First avatar (commons governance expert)
 
@@ -51,9 +54,18 @@ Each avatar has a `config.json` following the schema in `packages/core/avatar-sc
 ## MCP Server Tools
 
 Avatar MCP servers expose three tools:
-- `query_corpus` — Retrieve relevant passages from vector store
+- `query_corpus` — Retrieve relevant passages via Supabase pgvector similarity search
 - `generate_response` — Generate grounded response with citations
 - `get_avatar_info` — Return avatar metadata
+
+## Database (Supabase)
+
+Key tables in `supabase/schema.sql`:
+- `avatars` — Avatar metadata and system prompts
+- `avatar_documents` — Source document metadata (for transparency)
+- `avatar_chunks` — Text chunks with `vector(1536)` embeddings
+
+Similarity search via `search_avatar_chunks()` function.
 
 ## Avatar Configuration
 
