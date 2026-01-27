@@ -1,0 +1,35 @@
+{
+  "name": "avatar-sdk",
+  "version": "0.1.0",
+  "description": "Conversational Avatar Protocol - Bring historical experts into group discussions",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "avatars/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint"
+  },
+  "keywords": [
+    "avatar",
+    "conversational-ai",
+    "mcp",
+    "rag",
+    "knowledge-base",
+    "deliberation",
+    "governance"
+  ],
+  "author": "Harmonica",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harmonicabot/avatar-sdk.git"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.3.0"
+  }
+}

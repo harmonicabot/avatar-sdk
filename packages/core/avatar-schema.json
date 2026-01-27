@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Avatar Configuration",
+  "description": "Schema for defining a conversational avatar",
+  "type": "object",
+  "required": ["id", "name", "description", "corpus", "systemPrompt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for the avatar (lowercase, hyphens only)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the avatar"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the avatar's expertise"
+    },
+    "birthYear": {
+      "type": "integer",
+      "description": "Birth year of the historical figure"
+    },
+    "deathYear": {
+      "type": "integer",
+      "description": "Death year of the historical figure (if applicable)"
+    },
+    "expertise": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of expertise areas"
+    },
+    "corpus": {
+      "type": "object",
+      "required": ["description", "sources"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the corpus"
+        },
+        "dateRange": {
+          "type": "object",
+          "properties": {
+            "start": { "type": "string", "format": "date" },
+            "end": { "type": "string", "format": "date" }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "type"],
+            "properties": {
+              "title": { "type": "string" },
+              "type": {
+                "type": "string",
+                "enum": ["book", "paper", "speech", "interview", "article", "letter"]
+              },
+              "year": { "type": "integer" },
+              "url": { "type": "string", "format": "uri" },
+              "archiveUrl": { "type": "string", "format": "uri" },
+              "verified": { "type": "boolean", "default": false }
+            }
+          }
+        }
+      }
+    },
+    "systemPrompt": {
+      "type": "object",
+      "required": ["identity", "tone", "constraints", "citationStyle"],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "description": "How the avatar identifies itself"
+        },
+        "tone": {
+          "type": "string",
+          "description": "Communication style"
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What the avatar should NOT do"
+        },
+        "citationStyle": {
+          "type": "string",
+          "description": "How to reference sources"
+        }
+      }
+    },
+    "qdrant": {
+      "type": "object",
+      "properties": {
+        "collection": { "type": "string" },
+        "embeddingModel": { "type": "string" },
+        "chunkSize": { "type": "integer", "default": 512 },
+        "chunkOverlap": { "type": "integer", "default": 50 }
+      }
+    },
+    "mcpServer": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}
