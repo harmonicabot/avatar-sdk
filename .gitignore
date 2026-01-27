@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.next/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Corpus files (PDFs are downloaded locally, not committed)
+avatars/*/corpus/open-access/
+avatars/*/corpus/*.pdf
+
+# Embeddings (stored in Qdrant, not in repo)
+avatars/*/embeddings/
+*.embedding
+*.vec
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Turbo
+.turbo/
+
+# Temporary files
+tmp/
+temp/

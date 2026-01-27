@@ -1,0 +1,171 @@
+{
+  "avatar": "elinor-ostrom",
+  "corpus_description": "Open-access writings and research by Elinor Ostrom on commons governance, collective action, and institutional analysis (1965-2012)",
+  "last_updated": "2026-01-27",
+  "sources": [
+    {
+      "id": "sustaining-the-commons",
+      "title": "Sustaining the Commons",
+      "authors": ["John M. Anderies", "Marco A. Janssen"],
+      "year": 2016,
+      "type": "textbook",
+      "description": "Undergraduate textbook covering Ostrom's frameworks, 8 design principles, IAD framework, and case studies. Based on her work with co-authors.",
+      "url": "https://sustainingthecommons.org/wp-content/uploads/2019/06/Sustaining-the-Commons-v2.0.pdf",
+      "license": "Open Access",
+      "format": "PDF",
+      "verified": true,
+      "priority": "primary",
+      "topics": [
+        "design principles",
+        "IAD framework",
+        "collective action",
+        "social dilemmas",
+        "case studies",
+        "polycentric governance"
+      ]
+    },
+    {
+      "id": "nobel-lecture-2009",
+      "title": "Beyond Markets and States: Polycentric Governance of Complex Economic Systems",
+      "authors": ["Elinor Ostrom"],
+      "year": 2009,
+      "type": "lecture",
+      "description": "Nobel Prize lecture summarizing her life's work on polycentric governance and self-organization in commons management.",
+      "url": "https://www.nobelprize.org/uploads/2018/06/ostrom_lecture.pdf",
+      "license": "Nobel Foundation",
+      "format": "PDF",
+      "verified": true,
+      "priority": "primary",
+      "topics": [
+        "polycentric governance",
+        "self-organization",
+        "commons",
+        "institutional diversity"
+      ]
+    },
+    {
+      "id": "iad-framework-guide",
+      "title": "Updated Guide to IAD and the Language of the Ostrom Workshop",
+      "authors": ["Michael D. McGinnis"],
+      "year": 2011,
+      "type": "guide",
+      "description": "Comprehensive guide to the Institutional Analysis and Development (IAD) framework developed by Vincent and Elinor Ostrom.",
+      "url": "https://mcginnis.pages.iu.edu/iad_guide.pdf",
+      "license": "Open Access",
+      "format": "PDF",
+      "verified": true,
+      "priority": "primary",
+      "topics": [
+        "IAD framework",
+        "institutional analysis",
+        "action situations",
+        "rules"
+      ]
+    },
+    {
+      "id": "ses-framework-science-2009",
+      "title": "A General Framework for Analyzing Sustainability of Social-Ecological Systems",
+      "authors": ["Elinor Ostrom"],
+      "year": 2009,
+      "type": "paper",
+      "journal": "Science",
+      "volume": "325",
+      "pages": "419-422",
+      "description": "Introduces the Social-Ecological Systems (SES) framework with 10 subsystem variables affecting self-organization.",
+      "url": "https://www.science.org/doi/10.1126/science.1172133",
+      "doi": "10.1126/science.1172133",
+      "license": "Paywalled (check institutional access or author manuscript)",
+      "format": "PDF",
+      "verified": true,
+      "priority": "secondary",
+      "topics": [
+        "SES framework",
+        "sustainability",
+        "self-organization",
+        "social-ecological systems"
+      ]
+    },
+    {
+      "id": "struggle-to-govern-commons",
+      "title": "The Struggle to Govern the Commons",
+      "authors": ["Thomas Dietz", "Elinor Ostrom", "Paul C. Stern"],
+      "year": 2003,
+      "type": "paper",
+      "journal": "Science",
+      "volume": "302",
+      "pages": "1907-1912",
+      "description": "Overview of adaptive governance approaches for managing commons at multiple scales.",
+      "url": "https://www.science.org/doi/10.1126/science.1091015",
+      "doi": "10.1126/science.1091015",
+      "hdl": "http://hdl.handle.net/10535/5531",
+      "license": "Check DLC for open version",
+      "format": "PDF",
+      "verified": true,
+      "priority": "secondary",
+      "topics": [
+        "adaptive governance",
+        "commons management",
+        "institutional design"
+      ]
+    },
+    {
+      "id": "iad-background-2011",
+      "title": "Background on the Institutional Analysis and Development Framework",
+      "authors": ["Elinor Ostrom"],
+      "year": 2011,
+      "type": "paper",
+      "journal": "Policy Studies Journal",
+      "volume": "39",
+      "issue": "1",
+      "pages": "7-27",
+      "description": "Ostrom's own summary of the IAD framework's development and application.",
+      "url": "http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2010.00394.x/pdf",
+      "license": "Check for open access version",
+      "format": "PDF",
+      "verified": true,
+      "priority": "secondary",
+      "topics": [
+        "IAD framework",
+        "policy analysis"
+      ]
+    }
+  ],
+  "digital_library_of_commons": {
+    "description": "The Digital Library of the Commons (DLC) at Indiana University contains many Ostrom papers and working papers",
+    "base_url": "http://dlc.dlib.indiana.edu/dlc/",
+    "search_url": "http://dlc.dlib.indiana.edu/dlc/search",
+    "note": "Many papers have hdl.handle.net/10535/ identifiers providing direct access"
+  },
+  "open_access_journals": [
+    {
+      "name": "Ecology and Society",
+      "url": "https://www.ecologyandsociety.org/",
+      "description": "Fully open access journal with many Ostrom co-authored papers"
+    },
+    {
+      "name": "International Journal of the Commons",
+      "url": "https://www.thecommonsjournal.org/",
+      "description": "Open access journal devoted to commons research"
+    }
+  ],
+  "excluded_sources": [
+    {
+      "title": "Governing the Commons: The Evolution of Institutions for Collective Action",
+      "year": 1990,
+      "publisher": "Cambridge University Press",
+      "reason": "Copyrighted - not included without license"
+    },
+    {
+      "title": "Understanding Institutional Diversity",
+      "year": 2005,
+      "publisher": "Princeton University Press",
+      "reason": "Copyrighted - not included without license"
+    },
+    {
+      "title": "Rules, Games, and Common-Pool Resources",
+      "year": 1994,
+      "publisher": "University of Michigan Press",
+      "reason": "Copyrighted - not included without license"
+    }
+  ]
+}
