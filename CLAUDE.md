@@ -33,8 +33,8 @@ packages/
 ├── core/               # Protocol specification
 │   ├── avatar-schema.json   # JSON schema for avatar config
 │   └── mcp-spec.md          # MCP tools specification
-├── processor/          # Corpus → embeddings pipeline (planned)
-└── mcp-server/         # Reference MCP server (planned)
+├── processor/          # Corpus → embeddings pipeline [not yet implemented]
+└── mcp-server/         # Reference MCP server [not yet implemented]
 
 avatars/
 └── elinor-ostrom/      # First avatar
@@ -78,7 +78,7 @@ Avatars defined in `config.json` following `packages/core/avatar-schema.json`:
     "identity": "...",
     "tone": "...",
     "constraints": ["Only cite actual research", "Acknowledge limitations"],
-    "citationStyle": "First person past tense"
+    "citationStyle": "Student voice with attributed quotes"
   },
   "vectorStore": {
     "embeddingModel": "text-embedding-3-small",
@@ -87,13 +87,19 @@ Avatars defined in `config.json` following `packages/core/avatar-schema.json`:
 }
 ```
 
-## Critical Avatar Constraints
+## The "Student" Framing
 
-All avatars must:
+Avatars speak in their own voice as participants who have studied the source material — not as the historical figure. This is intentional:
+
+- Avatar interprets and synthesizes, not "channels"
+- Quotes are clearly attributed: "This quote from Ostrom seems relevant: ..."
+- Speaks as "Ostrom's Student" making sense of material, like any participant
+
+**All avatars must:**
 - Only cite actual research from their corpus
-- Acknowledge limitations and time period ("I didn't study digital commons")
+- Attribute quotes directly to the expert (not first-person)
+- Acknowledge limitations ("Ostrom didn't study digital commons")
 - Never invent positions on uncovered topics
-- Use first-person past tense for citations ("In my research on Nepal...")
 
 ## Corpus Management
 
@@ -103,6 +109,14 @@ Source documents tracked in `avatars/[name]/corpus/sources.json`:
 - Embeddings stored in Supabase (not in repo)
 
 Copyrighted works (e.g., "Governing the Commons") are listed in `excluded_sources` with reason.
+
+## Environment Variables
+
+For MCP server and processing pipeline:
+- `SUPABASE_URL` — Supabase project URL
+- `SUPABASE_ANON_KEY` — Supabase anonymous key (for public read access)
+- `SUPABASE_SERVICE_KEY` — Service role key (for processing pipeline)
+- `OPENAI_API_KEY` — For generating embeddings
 
 ## Adding New Avatars
 
