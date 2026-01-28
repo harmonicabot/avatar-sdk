@@ -4,23 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Avatar SDK implements the **Conversational Avatar Protocol (CAP)** — an open standard for bringing knowledge avatars (AI agents grounded in verified corpora) into group discussions. Unlike traditional RAG chatbots, these avatars participate in conversations, understand context, and cite specific sources.
+**Avatar SDK** provides infrastructure for building knowledge avatars — AI agents grounded in verified source documents representing historical thinkers.
 
-**Primary integration platform:** Harmonica (structured deliberation sessions with 1:1 dialogues)
+**Conversational Avatar Protocol (CAP)** is the open standard that allows avatars built with the SDK to be deployed on any platform supporting the protocol. Built on MCP (Model Context Protocol).
 
-## Tech Stack
+| Component | Purpose |
+|-----------|---------|
+| Avatar SDK | Build avatars: corpus processing, embeddings, persona definition |
+| CAP | Deploy avatars: standard interface for platform integration |
 
-- **Database:** Supabase (PostgreSQL + pgvector)
-- **Embeddings:** OpenAI text-embedding-3-small
-- **LLM:** Claude (Anthropic)
-- **Protocol:** MCP (Model Context Protocol)
-- **Processing:** LlamaIndex
-- **Build System:** Turbo (monorepo)
+**Primary integration platform:** Harmonica (structured deliberation sessions)
 
 ## Commands
 
 ```bash
-npm run build     # Build all packages
+npm run build     # Build all packages (Turbo)
 npm run dev       # Development mode
 npm run test      # Run tests
 npm run lint      # Lint all packages
@@ -28,62 +26,87 @@ npm run lint      # Lint all packages
 
 ## Architecture
 
-This is a Turbo monorepo with workspaces:
+Turbo monorepo with workspaces:
 
-- `packages/*` — Core SDK packages
-  - `packages/core/` — Protocol specification and avatar schema
-  - `packages/processor/` — Corpus → embeddings pipeline (planned)
-  - `packages/mcp-server/` — Reference MCP server implementation (planned)
+```
+packages/
+├── core/               # Protocol specification
+│   ├── avatar-schema.json   # JSON schema for avatar config
+│   └── mcp-spec.md          # MCP tools specification
+├── processor/          # Corpus → embeddings pipeline (planned)
+└── mcp-server/         # Reference MCP server (planned)
 
-- `supabase/` — Database schema
-  - `supabase/schema.sql` — Tables for avatars, documents, chunks with pgvector
+avatars/
+└── elinor-ostrom/      # First avatar
+    ├── config.json          # Avatar configuration
+    └── corpus/
+        └── sources.json     # Open-access document URLs
 
-- `avatars/*` — Official curated avatars
-  - `avatars/elinor-ostrom/` — First avatar (commons governance expert)
+supabase/
+└── schema.sql          # Database schema (avatars, documents, chunks)
+```
 
-Each avatar has a `config.json` following the schema in `packages/core/avatar-schema.json`.
+## Database (Supabase + pgvector)
 
-## Key Concepts
-
-**Avatar:** AI agent grounded in a verified corpus representing a historical figure's documented positions.
-
-**Corpus:** Verified source documents (books, papers, speeches) that define what an avatar "knows."
-
-**Grounded Response:** Response drawn from retrieved corpus passages, not general LLM knowledge. Must cite sources.
-
-## MCP Server Tools
-
-Avatar MCP servers expose three tools:
-- `query_corpus` — Retrieve relevant passages via Supabase pgvector similarity search
-- `generate_response` — Generate grounded response with citations
-- `get_avatar_info` — Return avatar metadata
-
-## Database (Supabase)
-
-Key tables in `supabase/schema.sql`:
-- `avatars` — Avatar metadata and system prompts
+Three tables in `supabase/schema.sql`:
+- `avatars` — Metadata, system prompts, vector store config
 - `avatar_documents` — Source document metadata (for transparency)
 - `avatar_chunks` — Text chunks with `vector(1536)` embeddings
 
-Similarity search via `search_avatar_chunks()` function.
+Similarity search via `search_avatar_chunks(avatar_id, query_embedding, limit, threshold)`.
+
+## MCP Server Tools
+
+Avatar servers expose three tools (see `packages/core/mcp-spec.md`):
+- `query_corpus` — Semantic search, returns passages with similarity scores
+- `generate_response` — Grounded response with citations from passages
+- `get_avatar_info` — Avatar metadata (name, expertise, corpus size)
 
 ## Avatar Configuration
 
-Avatars are defined in `config.json` with:
-- Identity and expertise areas
-- Corpus sources with verification status
-- System prompt (identity, tone, constraints, citation style)
-- Vector store settings (Supabase table, embedding model, chunk size)
+Avatars defined in `config.json` following `packages/core/avatar-schema.json`:
 
-**Critical constraints for avatars:**
-- Only cite actual research from the corpus
-- Acknowledge limitations and time period
+```json
+{
+  "id": "elinor-ostrom",
+  "name": "Elinor Ostrom",
+  "expertise": ["commons governance", "collective action"],
+  "corpus": {
+    "sources": [{ "title": "...", "url": "...", "verified": true }]
+  },
+  "systemPrompt": {
+    "identity": "...",
+    "tone": "...",
+    "constraints": ["Only cite actual research", "Acknowledge limitations"],
+    "citationStyle": "First person past tense"
+  },
+  "vectorStore": {
+    "embeddingModel": "text-embedding-3-small",
+    "chunkSize": 512
+  }
+}
+```
+
+## Critical Avatar Constraints
+
+All avatars must:
+- Only cite actual research from their corpus
+- Acknowledge limitations and time period ("I didn't study digital commons")
 - Never invent positions on uncovered topics
-- Use first-person past tense for citations
+- Use first-person past tense for citations ("In my research on Nepal...")
+
+## Corpus Management
+
+Source documents tracked in `avatars/[name]/corpus/sources.json`:
+- URLs to open-access PDFs (committed to repo)
+- Actual PDFs downloaded to `corpus/open-access/` (gitignored)
+- Embeddings stored in Supabase (not in repo)
+
+Copyrighted works (e.g., "Governing the Commons") are listed in `excluded_sources` with reason.
 
 ## Adding New Avatars
 
-1. Create directory under `avatars/[avatar-name]/`
-2. Add `config.json` following `packages/core/avatar-schema.json`
-3. Add corpus documents to `corpus/` subdirectory
-4. Process into embeddings and store in Supabase via `avatar_chunks` table
+1. Create `avatars/[avatar-name]/config.json` following the schema
+2. Add corpus sources to `avatars/[avatar-name]/corpus/sources.json`
+3. Process documents into embeddings (pipeline in `packages/processor/`)
+4. Insert into Supabase `avatar_chunks` table
