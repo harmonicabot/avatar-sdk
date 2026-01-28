@@ -73,7 +73,7 @@ Avatars are defined in `config.json` with:
 - Identity and expertise areas
 - Corpus sources with verification status
 - System prompt (identity, tone, constraints, citation style)
-- Qdrant collection settings
+- Vector store settings (Supabase table, embedding model, chunk size)
 
 **Critical constraints for avatars:**
 - Only cite actual research from the corpus
@@ -86,4 +86,4 @@ Avatars are defined in `config.json` with:
 1. Create directory under `avatars/[avatar-name]/`
 2. Add `config.json` following `packages/core/avatar-schema.json`
 3. Add corpus documents to `corpus/` subdirectory
-4. Process into embeddings and store in Qdrant collection
+4. Process into embeddings and store in Supabase via `avatar_chunks` table
