@@ -1,6 +1,6 @@
 # Avatar SDK
 
-**Conversational Avatar Protocol (CAP)** — Bring historical experts into your group discussions.
+**Conversational Avatar Protocol (CAP)** — Conversational avatars representing real people based on their public writings.
 
 > "Making expert knowledge as accessible in group conversations as having the expert in the room."
 
@@ -216,20 +216,6 @@ See [`supabase/schema.sql`](./supabase/schema.sql) for full schema.
 - **LLM:** Claude (Anthropic)
 - **Protocol:** MCP (Model Context Protocol)
 - **Processing:** LlamaIndex
-
-## Two Economic Models
-
-### Official Avatars (We Host)
-- Curated, verified avatars like Ostrom
-- Hosted on Avatar SDK infrastructure
-- Users pay for LLM usage via credits
-- Goal: Public good, grant-funded
-
-### BYOI — Bring Your Own Infrastructure
-- You host your own Supabase project + MCP server
-- You bring your own LLM API keys
-- Zero cost from us
-- Full control over your data
 
 ## Contributing
 
