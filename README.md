@@ -1,14 +1,27 @@
 # Avatar SDK
 
-**Conversational Avatar Protocol (CAP)** — Conversational avatars representing real people based on their public writings.
+Infrastructure for building knowledge avatars grounded in verified source documents.
 
 > "Making expert knowledge as accessible in group conversations as having the expert in the room."
 
 ## What is Avatar SDK?
 
-Avatar SDK implements the **Conversational Avatar Protocol** — an open standard for bringing knowledge avatars into group discussions. Unlike traditional chatbots that answer individual queries, conversational avatars participate in ongoing discussions, understand group context, and contribute when relevant.
+Avatar SDK provides the tools to create **knowledge avatars** — AI agents that represent historical thinkers based exclusively on their documented writings. The SDK handles:
 
-Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), Avatar SDK enables any platform to integrate experts like Elinor Ostrom, Gandhi, or Thomas Paine into their community conversations.
+- **Corpus management** — Ingest, chunk, and embed source documents (books, papers, speeches)
+- **Vector storage** — Store embeddings in Supabase with pgvector for semantic retrieval
+- **Grounded responses** — Generate responses that cite specific sources, never inventing positions
+
+## What is the Conversational Avatar Protocol (CAP)?
+
+**CAP** is an open standard that allows avatars built with the SDK to be deployed on any platform that supports the protocol. While traditional chatbots answer isolated queries, CAP-compliant avatars participate in ongoing group conversations.
+
+| Component | What it does |
+|-----------|--------------|
+| **Avatar SDK** | Build avatars: process corpora, generate embeddings, define personas |
+| **CAP** | Deploy avatars: standard interface for platforms to integrate avatars |
+
+Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), CAP enables platforms like Harmonica, Slack, or Discord to integrate experts like Elinor Ostrom, Gandhi, or Thomas Paine into community conversations.
 
 ## The Conversational Difference
 
