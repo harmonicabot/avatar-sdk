@@ -2,11 +2,11 @@
 
 Infrastructure for building knowledge avatars grounded in verified source documents.
 
-> "Making expert knowledge as accessible in group conversations as having the expert in the room."
+> "Like having a well-read student of the expert in your conversation — one who can quickly find and interpret relevant passages."
 
 ## What is Avatar SDK?
 
-Avatar SDK provides the tools to create **knowledge avatars** — AI agents that represent historical thinkers based exclusively on their documented writings. The SDK handles:
+Avatar SDK provides the tools to create **knowledge avatars** — AI agents that serve as "students" of historical thinkers, grounded in their documented writings. Rather than pretending to *be* the expert, avatars speak in their own voice while drawing on verified source material. The SDK handles:
 
 - **Corpus management** — Ingest, chunk, and embed source documents (books, papers, speeches)
 - **Vector storage** — Store embeddings in Supabase with pgvector for semantic retrieval
@@ -30,7 +30,7 @@ Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), CAP e
 | You ask → It answers | Group discusses → Avatar participates |
 | One-on-one interaction | Multi-party dialogue |
 | Stateless queries | Conversation-aware |
-| Like a search engine | Like having an expert in the room |
+| Like a search engine | Like a knowledgeable participant who's read all the sources |
 
 ## How It Works
 
@@ -43,9 +43,9 @@ Each avatar consists of:
 
 When a topic arises in conversation, the avatar:
 1. Retrieves relevant passages from its corpus
-2. Grounds its response in documented positions
-3. Cites specific sources (e.g., "As I wrote in Governing the Commons...")
-4. Acknowledges limitations ("I didn't study digital commons extensively")
+2. Offers its interpretation grounded in the source material
+3. Cites the expert directly (e.g., "This quote from Ostrom seems relevant: ...")
+4. Speaks in its own voice as another participant making sense of the material
 
 ## Architecture
 
@@ -114,13 +114,15 @@ Session: "Community Garden Governance"
 
 Facilitator: "What's your main concern about the garden?"
 Participant: [shares concern about resource allocation]
-Facilitator: "Would you like to consult Ostrom about this?"
+Facilitator: "Would you like to consult Ostrom's Student about this?"
 Participant: "Yes"
 
-Ostrom: "The irrigation systems I studied in Nepal faced
-similar allocation challenges. The communities that succeeded
-had clear boundaries and proportional equivalence between
-benefits and costs..."
+Ostrom's Student: "I think this comes down to matching benefits
+with contributions. Ostrom studied irrigation systems in Nepal
+that faced similar challenges. She found that communities succeeded
+when they had clear boundaries and proportional equivalence —
+here's a relevant passage: '...those who benefit from the resource
+should contribute proportionally to its maintenance...'"
 ```
 
 ### Future Platforms
@@ -243,19 +245,27 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guideline
 
 ## Ethics & Safety
 
+### The "Student" Framing
+
+Avatars speak in their own voice as participants who have deeply studied the source material — not as the historical figure themselves. This is intentional:
+
+- **Honest representation** — The AI is interpreting and synthesizing, not channeling
+- **Clear attribution** — Quotes are clearly marked as coming from the expert
+- **Appropriate humility** — The avatar is "making sense of" the material, just like any other participant
+
 ### What This Is
-Making documented research and writings searchable and conversational within group discussions.
+Making documented research and writings accessible within group discussions through an AI participant who has studied the material.
 
 ### What This Is Not
-- Not "bringing back the dead"
+- Not "bringing back the dead" or pretending to be the person
 - Not inventing positions they never held
-- Not replacing primary sources
+- Not replacing primary sources — encouraging engagement with them
 
 ### Safeguards
 - All source documents publicly verifiable
-- Responses cite specific sources
-- Avatars acknowledge limitations
-- Clear labeling as AI representations
+- Direct quotes clearly attributed to the expert
+- Avatar speaks as interpreter, not as the expert
+- Clear labeling as AI representation ("Ostrom's Student")
 
 ## License
 
@@ -269,4 +279,4 @@ MIT License — See [LICENSE](./LICENSE)
 
 ---
 
-*"Like having Elinor Ostrom in your community meeting, grounded in everything she actually wrote."*
+*"Like having a diligent student of Elinor Ostrom in your community meeting — one who can quickly find relevant passages and offer interpretations grounded in her actual writings."*
