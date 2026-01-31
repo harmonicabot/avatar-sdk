@@ -21,7 +21,7 @@ Avatar SDK provides the tools to create **knowledge avatars** — AI agents that
 | **Avatar SDK** | Build avatars: process corpora, generate embeddings, define personas |
 | **CAP** | Deploy avatars: standard interface for platforms to integrate avatars |
 
-Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), CAP enables platforms like Harmonica, Slack, or Discord to integrate experts like Elinor Ostrom, Gandhi, or Thomas Paine into community conversations.
+Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), CAP enables platforms like Harmonica to integrate knowledge avatars into community conversations.
 
 ## The Conversational Difference
 
@@ -53,61 +53,73 @@ When a topic arises in conversation, the avatar:
 avatar-sdk/
 ├── packages/
 │   ├── core/                    # Protocol specification
-│   │   ├── mcp-spec.md
-│   │   ├── avatar-schema.json
-│   │   └── verification.md
+│   │   ├── avatar-schema.json   # JSON Schema for avatar configs
+│   │   └── mcp-spec.md         # MCP tools specification
 │   │
 │   ├── processor/               # Corpus → embeddings pipeline
-│   │   ├── chunk.ts
-│   │   ├── embed.ts
-│   │   └── verify.ts
+│   │   └── src/
+│   │       ├── index.ts         # CLI entry point
+│   │       ├── extract.ts       # PDF → per-page text
+│   │       ├── chunk.ts         # Text → token-aware chunks
+│   │       ├── embed.ts         # Chunks → OpenAI embeddings
+│   │       └── ingest.ts        # Embeddings → Supabase
 │   │
-│   └── mcp-server/              # Reference MCP server
-│       └── server.ts
+│   └── mcp-server/              # Reference MCP server [planned]
 │
-├── supabase/                    # Database schema
-│   └── schema.sql
+├── avatars/
+│   └── elinor-ostrom/           # First avatar
+│       ├── config.json          # Avatar configuration
+│       └── corpus/
+│           ├── sources.json     # Source metadata + URLs
+│           └── open-access/     # Downloaded PDFs (gitignored)
 │
-├── avatars/                     # Official curated avatars
-│   ├── elinor-ostrom/
-│   ├── gandhi/
-│   └── thomas-paine/
-│
-├── templates/                   # For creating your own
-│   └── avatar-template/
+├── supabase/
+│   └── schema.sql               # Database schema
 │
 └── docs/
-    ├── protocol.md
-    ├── creating-avatars.md
-    └── integration-guide.md
+    └── protocol.md
 ```
 
-## Official Avatars
+## Current Avatar: Elinor Ostrom
 
-### Elinor Ostrom (First Avatar)
 Nobel laureate in economics, studied how communities successfully self-govern common resources.
 
 **Expertise:** Commons governance, polycentric systems, collective action, institutional design
 
-**Corpus:** "Governing the Commons" (1990), "Understanding Institutional Diversity" (2005), major academic papers
+**Corpus (352 chunks across 3 documents):**
+- *Sustaining the Commons* (Anderies & Janssen, 2016) — Textbook covering Ostrom's frameworks
+- *Beyond Markets and States* (Ostrom, 2009) — Nobel Prize lecture
+- *Updated Guide to IAD* (McGinnis, 2011) — IAD framework guide
 
 **Use cases:**
 - Community land trusts discussing allocation
 - DAOs designing governance structures
 - Cooperatives managing shared resources
 
-### Coming Soon
-- **Mahatma Gandhi** — Nonviolent resistance, village self-governance, swaraj
-- **Thomas Paine** — Revolutionary democracy, rights of man
-- **Mary Parker Follett** — Integrative decision-making, industrial democracy
-- **Peter Kropotkin** — Mutual aid, decentralized organization
+## Quick Start
 
-## Platform Integrations
+### Processing a Corpus
 
-Avatar SDK is designed to work with any platform. Current focus:
+```bash
+# Install dependencies
+npm install
 
-### Harmonica (Primary)
-Structured deliberation sessions with 1:1 dialogues. Participants can consult avatars during facilitated discussions.
+# Download PDFs to avatars/elinor-ostrom/corpus/open-access/
+
+# Dry run (extract + chunk, no API calls)
+npx tsx packages/processor/src/index.ts --avatar elinor-ostrom --dry-run
+
+# Full run (requires SUPABASE_URL, SUPABASE_SERVICE_KEY, OPENAI_API_KEY)
+npx tsx packages/processor/src/index.ts --avatar elinor-ostrom
+
+# Process single source
+npx tsx packages/processor/src/index.ts --avatar elinor-ostrom --source nobel-lecture-2009
+
+# Re-process (clears existing chunks first)
+npx tsx packages/processor/src/index.ts --avatar elinor-ostrom --source nobel-lecture-2009 --force
+```
+
+### Platform Integration (Harmonica)
 
 ```
 Session: "Community Garden Governance"
@@ -125,49 +137,7 @@ here's a relevant passage: '...those who benefit from the resource
 should contribute proportionally to its maintenance...'"
 ```
 
-### Future Platforms
-- Slack (via bot mentions)
-- Discord (via slash commands)
-- Custom integrations via MCP
-
-## Quick Start
-
-### Using an Official Avatar
-
-```typescript
-import { AvatarClient } from '@avatar-sdk/client';
-
-const ostrom = new AvatarClient({
-  avatar: 'elinor-ostrom',
-  apiKey: process.env.AVATAR_SDK_KEY
-});
-
-const response = await ostrom.query({
-  context: conversationHistory,
-  question: "How should we handle free-riders in our community garden?"
-});
-```
-
-### Creating Your Own Avatar
-
-```bash
-# Install CLI
-npm install -g @avatar-sdk/cli
-
-# Initialize new avatar
-avatar-sdk init my-avatar
-
-# Add documents to corpus
-avatar-sdk add ./documents/*.pdf
-
-# Process and embed
-avatar-sdk process
-
-# Test locally
-avatar-sdk serve
-```
-
-## Data Model (Supabase)
+## Data Model (Supabase + pgvector)
 
 ```sql
 -- Avatar definition
@@ -188,7 +158,8 @@ create table avatar_documents (
   title text not null,
   url text,
   document_type text,
-  verified boolean default false
+  verified boolean default false,
+  processed boolean default false
 );
 
 -- Text chunks with embeddings
@@ -196,7 +167,7 @@ create table avatar_chunks (
   id uuid primary key,
   avatar_id text references avatars(id),
   content text not null,
-  embedding vector(1536),  -- pgvector
+  embedding vector(1536),
   source_title text,
   source_page int
 );
@@ -211,37 +182,21 @@ select * from search_avatar_chunks(
 
 See [`supabase/schema.sql`](./supabase/schema.sql) for full schema.
 
-## Why Start with Historical Figures?
+## Why Historical Figures?
 
-1. **Legal clarity** — Writings in public domain
+1. **Legal clarity** — Writings in public domain or open access
 2. **Cultural consensus** — Time for historical evaluation
 3. **Completed corpus** — No evolving positions to track
 4. **Less controversy** — Prove concept before contemporary figures
 
-**Roadmap:**
-- Historical figures (public domain)
-- 20th century thinkers (deceased 20+ years)
-- Contemporary experts (with careful protocols)
-- User-generated avatars (BYOI — Bring Your Own Infrastructure)
-
 ## Technical Stack
 
+- **Monorepo:** Turbo
 - **Database:** Supabase (PostgreSQL + pgvector)
-- **Embeddings:** OpenAI text-embedding-3-small
+- **Embeddings:** OpenAI text-embedding-3-small (1536 dimensions)
+- **PDF Processing:** pdf-parse + gpt-tokenizer
 - **LLM:** Claude (Anthropic)
 - **Protocol:** MCP (Model Context Protocol)
-- **Processing:** LlamaIndex
-
-## Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-**Ways to contribute:**
-- Add documents to official avatar corpora
-- Create new avatar configurations
-- Build platform integrations
-- Improve processing pipeline
-- Write documentation
 
 ## Ethics & Safety
 
@@ -252,9 +207,6 @@ Avatars speak in their own voice as participants who have deeply studied the sou
 - **Honest representation** — The AI is interpreting and synthesizing, not channeling
 - **Clear attribution** — Quotes are clearly marked as coming from the expert
 - **Appropriate humility** — The avatar is "making sense of" the material, just like any other participant
-
-### What This Is
-Making documented research and writings accessible within group discussions through an AI participant who has studied the material.
 
 ### What This Is Not
 - Not "bringing back the dead" or pretending to be the person
@@ -267,13 +219,21 @@ Making documented research and writings accessible within group discussions thro
 - Avatar speaks as interpreter, not as the expert
 - Clear labeling as AI representation ("Ostrom's Student")
 
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+- Add documents to official avatar corpora
+- Create new avatar configurations
+- Build platform integrations
+- Improve processing pipeline
+
 ## License
 
 MIT License — See [LICENSE](./LICENSE)
 
 ## Links
 
-- [Documentation](./docs/)
 - [Protocol Specification](./packages/core/mcp-spec.md)
 - [Harmonica](https://harmonica.chat) — Primary integration platform
 
