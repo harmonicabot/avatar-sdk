@@ -1,0 +1,21 @@
+{
+  "name": "@avatar-sdk/processor",
+  "version": "0.1.0",
+  "description": "Corpus processing pipeline: PDF → extract → chunk → embed → store",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "process": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "gpt-tokenizer": "^2.8.1",
+    "openai": "^4.77.0",
+    "@supabase/supabase-js": "^2.47.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}

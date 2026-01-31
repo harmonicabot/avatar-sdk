@@ -4,123 +4,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Avatar SDK** provides infrastructure for building knowledge avatars — AI agents grounded in verified source documents representing historical thinkers.
+**Avatar SDK** — infrastructure for building knowledge avatars grounded in verified source documents. Avatars are AI agents that serve as "students" of historical thinkers, participating in group conversations with cited, grounded responses.
 
-**Conversational Avatar Protocol (CAP)** is the open standard that allows avatars built with the SDK to be deployed on any platform supporting the protocol. Built on MCP (Model Context Protocol).
-
-| Component | Purpose |
-|-----------|---------|
-| Avatar SDK | Build avatars: corpus processing, embeddings, persona definition |
-| CAP | Deploy avatars: standard interface for platform integration |
-
-**Primary integration platform:** Harmonica (structured deliberation sessions)
+**Conversational Avatar Protocol (CAP)** — open standard (built on MCP) for deploying avatars on any platform. Primary integration: Harmonica.
 
 ## Commands
 
 ```bash
-npm run build     # Build all packages (Turbo)
-npm run dev       # Development mode
-npm run test      # Run tests
-npm run lint      # Lint all packages
+npm run build                    # Build all packages (Turbo)
+npm run dev                      # Development mode
+npm run test                     # Run tests
+
+# Corpus processing
+npx tsx packages/processor/src/index.ts --avatar <id>              # Process all primary sources
+npx tsx packages/processor/src/index.ts --avatar <id> --dry-run    # Extract + chunk only, no API calls
+npx tsx packages/processor/src/index.ts --avatar <id> --source <source-id>          # Single source
+npx tsx packages/processor/src/index.ts --avatar <id> --source <source-id> --force  # Re-process (clears existing chunks)
 ```
 
 ## Architecture
 
-Turbo monorepo with workspaces:
+Turbo monorepo (`packages/*` + `avatars/*` workspaces).
 
-```
-packages/
-├── core/               # Protocol specification
-│   ├── avatar-schema.json   # JSON schema for avatar config
-│   └── mcp-spec.md          # MCP tools specification
-├── processor/          # Corpus → embeddings pipeline [not yet implemented]
-└── mcp-server/         # Reference MCP server [not yet implemented]
+- **`packages/core/`** — Protocol specification: `avatar-schema.json` (JSON Schema for config), `mcp-spec.md` (MCP tools spec)
+- **`packages/processor/`** — Corpus pipeline: PDF → extract (`pdf-parse`) → chunk (sentence-boundary-aware, `gpt-tokenizer`) → embed (OpenAI batched) → store (Supabase pgvector). All config-driven from avatar's `config.json` vectorStore settings.
+- **`packages/mcp-server/`** — Reference MCP server (not yet implemented). Will expose `query_corpus`, `generate_response`, `get_avatar_info`.
+- **`avatars/elinor-ostrom/`** — First avatar. `config.json` defines persona + vectorStore config, `corpus/sources.json` has source metadata + URLs, `corpus/open-access/` holds downloaded PDFs (gitignored).
+- **`supabase/schema.sql`** — Three tables: `avatars`, `avatar_documents`, `avatar_chunks` (with `vector(1536)` + IVFFlat index). `search_avatar_chunks()` function for cosine similarity search. RLS: public read for official avatars, service role for writes.
 
-avatars/
-└── elinor-ostrom/      # First avatar
-    ├── config.json          # Avatar configuration
-    └── corpus/
-        └── sources.json     # Open-access document URLs
+## Database
 
-supabase/
-└── schema.sql          # Database schema (avatars, documents, chunks)
-```
+Supabase project: `eoqfooswdwxiepblhvgb`. Current state: elinor-ostrom avatar with 352 chunks across 3 documents.
 
-## Database (Supabase + pgvector)
+The `document_type` check constraint allows: book, paper, speech, interview, article, letter, textbook, guide, lecture.
 
-Three tables in `supabase/schema.sql`:
-- `avatars` — Metadata, system prompts, vector store config
-- `avatar_documents` — Source document metadata (for transparency)
-- `avatar_chunks` — Text chunks with `vector(1536)` embeddings
+## Processor Pipeline Details
 
-Similarity search via `search_avatar_chunks(avatar_id, query_embedding, limit, threshold)`.
-
-## MCP Server Tools
-
-Avatar servers expose three tools (see `packages/core/mcp-spec.md`):
-- `query_corpus` — Semantic search, returns passages with similarity scores
-- `generate_response` — Grounded response with citations from passages
-- `get_avatar_info` — Avatar metadata (name, expertise, corpus size)
-
-## Avatar Configuration
-
-Avatars defined in `config.json` following `packages/core/avatar-schema.json`:
-
-```json
-{
-  "id": "elinor-ostrom",
-  "name": "Elinor Ostrom",
-  "expertise": ["commons governance", "collective action"],
-  "corpus": {
-    "sources": [{ "title": "...", "url": "...", "verified": true }]
-  },
-  "systemPrompt": {
-    "identity": "...",
-    "tone": "...",
-    "constraints": ["Only cite actual research", "Acknowledge limitations"],
-    "citationStyle": "Student voice with attributed quotes"
-  },
-  "vectorStore": {
-    "embeddingModel": "text-embedding-3-small",
-    "chunkSize": 512
-  }
-}
-```
+Pipeline in `packages/processor/src/`:
+- **config.ts** — Loads avatar config + sources.json, resolves PDF paths relative to repo root. `filterSources()` selects primary PDF sources.
+- **extract.ts** — Per-page text extraction via pdf-parse's `pagerender` callback. Falls back to full text if page-level fails.
+- **chunk.ts** — Sliding window over sentences. Accumulates until `chunkSize` tokens (default 512), steps back by `chunkOverlap` tokens (default 50) for next window. Token counting via `gpt-tokenizer` (cl100k_base).
+- **embed.ts** — Batches of 100 chunks to OpenAI embeddings API. 3 retries with exponential backoff on 429/5xx.
+- **ingest.ts** — Upserts document in `avatar_documents` (matched by avatar_id + title), inserts chunks in batches of 100. Idempotent: checks `processed` flag, skips unless `--force`.
 
 ## The "Student" Framing
 
-Avatars speak in their own voice as participants who have studied the source material — not as the historical figure. This is intentional:
-
-- Avatar interprets and synthesizes, not "channels"
-- Quotes are clearly attributed: "This quote from Ostrom seems relevant: ..."
-- Speaks as "Ostrom's Student" making sense of material, like any participant
-
-**All avatars must:**
-- Only cite actual research from their corpus
-- Attribute quotes directly to the expert (not first-person)
-- Acknowledge limitations ("Ostrom didn't study digital commons")
-- Never invent positions on uncovered topics
-
-## Corpus Management
-
-Source documents tracked in `avatars/[name]/corpus/sources.json`:
-- URLs to open-access PDFs (committed to repo)
-- Actual PDFs downloaded to `corpus/open-access/` (gitignored)
-- Embeddings stored in Supabase (not in repo)
-
-Copyrighted works (e.g., "Governing the Commons") are listed in `excluded_sources` with reason.
+Avatars speak as participants who studied the source material — not as the historical figure. They cite actual research, attribute quotes to the expert, acknowledge limitations, and never invent positions. This framing is enforced via `systemPrompt.constraints` in config.json.
 
 ## Environment Variables
 
-For MCP server and processing pipeline:
+Store in `.env` (gitignored):
 - `SUPABASE_URL` — Supabase project URL
-- `SUPABASE_ANON_KEY` — Supabase anonymous key (for public read access)
-- `SUPABASE_SERVICE_KEY` — Service role key (for processing pipeline)
-- `OPENAI_API_KEY` — For generating embeddings
+- `SUPABASE_SERVICE_KEY` — Service role key (bypasses RLS, used by processor)
+- `SUPABASE_ANON_KEY` — Public key (for read-only access, used by MCP server)
+- `OPENAI_API_KEY` — For embedding generation
 
 ## Adding New Avatars
 
-1. Create `avatars/[avatar-name]/config.json` following the schema
-2. Add corpus sources to `avatars/[avatar-name]/corpus/sources.json`
-3. Process documents into embeddings (pipeline in `packages/processor/`)
-4. Insert into Supabase `avatar_chunks` table
+1. Create `avatars/[id]/config.json` following `packages/core/avatar-schema.json`
+2. Create `avatars/[id]/corpus/sources.json` with source metadata (id, title, authors, url, priority, type)
+3. Download PDFs to `avatars/[id]/corpus/open-access/[source-id].pdf`
+4. Run processor: `npx tsx packages/processor/src/index.ts --avatar [id]`
+5. Avatar record must exist in `avatars` table before processing (foreign key constraint)

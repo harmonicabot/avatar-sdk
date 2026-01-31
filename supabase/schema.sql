@@ -46,7 +46,7 @@ create table avatar_documents (
   title text not null,
   authors text[] default '{}',
   year int,
-  document_type text check (document_type in ('book', 'paper', 'speech', 'interview', 'article', 'letter', 'textbook', 'guide')),
+  document_type text check (document_type in ('book', 'paper', 'speech', 'interview', 'article', 'letter', 'textbook', 'guide', 'lecture')),
 
   -- Source URLs
   url text,
