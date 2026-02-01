@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src/",
     "process": "tsx src/index.ts"
   },
   "dependencies": {

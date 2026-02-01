@@ -12,6 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run build                    # Build all packages (Turbo)
+npm run lint                     # ESLint (typescript-eslint, flat config)
 npm run dev                      # Development mode
 npm run test                     # Run tests
 
@@ -21,6 +22,13 @@ npx tsx packages/processor/src/index.ts --avatar <id> --dry-run    # Extract + c
 npx tsx packages/processor/src/index.ts --avatar <id> --source <source-id>          # Single source
 npx tsx packages/processor/src/index.ts --avatar <id> --source <source-id> --force  # Re-process (clears existing chunks)
 ```
+
+## Code Style
+
+- TypeScript strict mode, ESM (`"type": "module"`)
+- ESLint flat config (`eslint.config.js`) with `typescript-eslint`; `@typescript-eslint/no-explicit-any` enforced — use typed catches and specific interfaces instead
+- Prettier: single quotes, trailing commas, 100 char width (`.prettierrc`)
+- CI runs lint + build on every PR (`.github/workflows/ci.yml`, Node 18+20 matrix)
 
 ## Architecture
 

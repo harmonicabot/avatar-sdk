@@ -44,3 +44,6 @@ coverage/
 # Temporary files
 tmp/
 temp/
+
+# OSS audit (local only)
+OSS-AUDIT.md

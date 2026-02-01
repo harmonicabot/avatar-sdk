@@ -1,6 +1,6 @@
 import { loadAvatarConfig, loadSources, filterSources, getVectorStoreConfig } from './config.js';
 import { extractPdf } from './extract.js';
-import { chunkDocument, countTokens } from './chunk.js';
+import { chunkDocument } from './chunk.js';
 import { embedChunks } from './embed.js';
 import {
   isDocumentProcessed,

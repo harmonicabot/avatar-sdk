@@ -23,10 +23,10 @@ export async function extractPdf(
 
   // pdf-parse pagerender callback to capture per-page text
   const result = await pdfParse(buffer, {
-    pagerender: async (pageData: any) => {
+    pagerender: async (pageData: { getTextContent: () => Promise<{ items: { str: string }[] }> }) => {
       const textContent = await pageData.getTextContent();
       const strings: string[] = textContent.items.map(
-        (item: any) => item.str as string,
+        (item: { str: string }) => item.str,
       );
       const text = strings.join(' ').trim();
       if (text.length > 0) {

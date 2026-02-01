@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Conversational Avatar Protocol - Bring historical experts into group discussions",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*",
     "avatars/*"
@@ -23,13 +24,18 @@
     "governance"
   ],
   "author": "Harmonica",
+  "packageManager": "npm@11.6.2",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/harmonicabot/avatar-sdk.git"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.2.0",
     "turbo": "^2.0.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "typescript-eslint": "^8.0.0"
   }
 }

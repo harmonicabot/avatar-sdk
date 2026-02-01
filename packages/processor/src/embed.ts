@@ -34,13 +34,14 @@ async function embedBatch(
         input: texts,
       });
       return response.data.map((d) => d.embedding);
-    } catch (err: any) {
-      const isRateLimit = err?.status === 429;
-      const isServer = err?.status >= 500;
+    } catch (err: unknown) {
+      const apiErr = err as { status?: number; message?: string };
+      const isRateLimit = apiErr?.status === 429;
+      const isServer = (apiErr?.status ?? 0) >= 500;
 
       if ((isRateLimit || isServer) && attempt < MAX_RETRIES - 1) {
         const delay = BASE_DELAY_MS * Math.pow(2, attempt);
-        log.warn(`API error (${err.status}), retrying in ${delay}ms...`);
+        log.warn(`API error (${apiErr.status}), retrying in ${delay}ms...`);
         await sleep(delay);
         continue;
       }

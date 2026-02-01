@@ -1,5 +1,7 @@
 # Avatar SDK
 
+> **Status: Alpha (v0.1.0)** — Under active development. APIs may change.
+
 Infrastructure for building knowledge avatars grounded in verified source documents.
 
 > "Like having a well-read student of the expert in your conversation — one who can quickly find and interpret relevant passages."
@@ -231,6 +233,10 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guideline
 ## License
 
 MIT License — See [LICENSE](./LICENSE)
+
+## Security
+
+To report a vulnerability, see [SECURITY.md](./SECURITY.md).
 
 ## Links
 
