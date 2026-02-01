@@ -238,6 +238,10 @@ MIT License — See [LICENSE](./LICENSE)
 
 To report a vulnerability, see [SECURITY.md](./SECURITY.md).
 
+## OSS Health
+
+This project follows open-source best practices from [Producing Open Source Software](https://producingoss.com/en/producingoss.html) by Karl Fogel. Run an audit with [`/audit-oss`](https://github.com/zhiganov/claude-audit-oss).
+
 ## Links
 
 - [Protocol Specification](./packages/core/mcp-spec.md)
