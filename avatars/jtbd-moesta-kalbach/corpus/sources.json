@@ -1,0 +1,1003 @@
+{
+  "avatar": "jtbd-moesta-kalbach",
+  "corpus_description": "JTBD methodology from Moesta (Demand-Side Sales 101) and Kalbach (The Jobs To Be Done Playbook)",
+  "last_updated": "2026-04-01",
+  "corpus_root": "../../../../book-power-output/mcp/jtbd-knowledge/corpus-export",
+  "sources": [
+    {
+      "id": "analysis-competing-solutions",
+      "title": "Competing Solutions Analysis",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-competing-solutions.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 697
+    },
+    {
+      "id": "analysis-forces-analysis",
+      "title": "Four Forces Analysis",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-forces-analysis.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 591
+    },
+    {
+      "id": "analysis-job-map-construction",
+      "title": "Job Map Construction",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-job-map-construction.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 642
+    },
+    {
+      "id": "analysis-odi-scoring",
+      "title": "ODI Opportunity Scoring",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-odi-scoring.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 626
+    },
+    {
+      "id": "analysis-persona-building",
+      "title": "Goal-Based Persona Construction",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-persona-building.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 708
+    },
+    {
+      "id": "analysis-timeline-extraction",
+      "title": "Buyer's Timeline Extraction",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "analysis-timeline-extraction.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 545
+    },
+    {
+      "id": "concepts-kalbach",
+      "title": "Key Concepts — Kalbach (JTBD Playbook)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "concepts-kalbach.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 1488
+    },
+    {
+      "id": "concepts-moesta",
+      "title": "Key Concepts — Moesta (Demand-Side Sales 101)",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "concepts-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 1627
+    },
+    {
+      "id": "framework-contrast-creates-value",
+      "title": "Contrast Creates Meaning / Value",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-contrast-creates-value.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 102
+    },
+    {
+      "id": "framework-domino-effect",
+      "title": "The Domino Effect",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-domino-effect.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 97
+    },
+    {
+      "id": "framework-fogg-behavior-model",
+      "title": "Fogg Behavior Model",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-fogg-behavior-model.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 94
+    },
+    {
+      "id": "framework-four-forces-kalbach",
+      "title": "Four Forces of Progress",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-four-forces-kalbach.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 126
+    },
+    {
+      "id": "framework-four-forces-moesta",
+      "title": "Four Forces of Progress",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-four-forces-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 158
+    },
+    {
+      "id": "framework-hiring-and-firing",
+      "title": "Hiring and Firing Products",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-hiring-and-firing.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 106
+    },
+    {
+      "id": "framework-hypothesis-progression-framework",
+      "title": "Hypothesis Progression Framework (HPF)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-hypothesis-progression-framework.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 101
+    },
+    {
+      "id": "framework-jobs-atlas",
+      "title": "Jobs Atlas",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jobs-atlas.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 106
+    },
+    {
+      "id": "framework-jtbd-framework-kalbach",
+      "title": "JTBD Framework (5 Elements)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jtbd-framework-kalbach.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 135
+    },
+    {
+      "id": "framework-jtbd-growth-strategy-matrix",
+      "title": "JTBD Growth Strategy Matrix",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jtbd-growth-strategy-matrix.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 134
+    },
+    {
+      "id": "framework-jtbd-hierarchy",
+      "title": "JTBD Hierarchy (4 Levels)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jtbd-hierarchy.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 150
+    },
+    {
+      "id": "framework-jtbd-theory-moesta",
+      "title": "Jobs to Be Done (JTBD) Theory",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jtbd-theory-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 137
+    },
+    {
+      "id": "framework-jtbd-timeline-moesta",
+      "title": "JTBD Timeline (Buyer's Timeline)",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-jtbd-timeline-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 164
+    },
+    {
+      "id": "framework-kano-model-moesta",
+      "title": "Kano Model (Applied to Demand-Side Sales)",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-kano-model-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 102
+    },
+    {
+      "id": "framework-little-hires-big-hires",
+      "title": "Little Hires and Big Hires",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-little-hires-big-hires.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 91
+    },
+    {
+      "id": "framework-odi",
+      "title": "Outcome-Driven Innovation (ODI)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-odi.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 150
+    },
+    {
+      "id": "framework-onboarding-assessment-matrix",
+      "title": "Onboarding Assessment Matrix",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-onboarding-assessment-matrix.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 164
+    },
+    {
+      "id": "framework-supply-vs-demand-side",
+      "title": "Supply-Side vs. Demand-Side Thinking",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-supply-vs-demand-side.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 76
+    },
+    {
+      "id": "framework-switch-timeline",
+      "title": "Switch Timeline",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-switch-timeline.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 112
+    },
+    {
+      "id": "framework-three-sources-of-energy",
+      "title": "Three Sources of Energy (Motivations)",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-three-sources-of-energy.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 96
+    },
+    {
+      "id": "framework-time-wall",
+      "title": "The Time Wall",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-time-wall.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 84
+    },
+    {
+      "id": "framework-universal-job-map",
+      "title": "Universal Job Map (8 Stages)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-universal-job-map.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 138
+    },
+    {
+      "id": "framework-value-proposition-canvas",
+      "title": "Value Proposition Canvas (VPC)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "framework-value-proposition-canvas.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 109
+    },
+    {
+      "id": "interview-questions",
+      "title": "JTBD Interview Questions",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "interview-questions.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 561
+    },
+    {
+      "id": "interview-techniques",
+      "title": "Interview Techniques",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "interview-techniques.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 1049
+    },
+    {
+      "id": "output-templates",
+      "title": "Output Templates",
+      "authors": [
+        "Bob Moesta",
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "output-templates.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 1552
+    },
+    {
+      "id": "quotes-kalbach",
+      "title": "Quotes — Kalbach (JTBD Playbook)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "article",
+      "description": "",
+      "path": "quotes-kalbach.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 438
+    },
+    {
+      "id": "quotes-moesta",
+      "title": "Quotes — Moesta (Demand-Side Sales 101)",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "article",
+      "description": "",
+      "path": "quotes-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 380
+    },
+    {
+      "id": "recipe-build-innovation-strategy",
+      "title": "Build Corporate Innovation Strategy",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "recipe-build-innovation-strategy.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 87
+    },
+    {
+      "id": "recipe-increase-demand",
+      "title": "Increase Demand",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "recipe-increase-demand.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 76
+    },
+    {
+      "id": "recipe-launch-new-product",
+      "title": "Launch a New Product",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "recipe-launch-new-product.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 85
+    },
+    {
+      "id": "recipe-make-customers-successful",
+      "title": "Make Customers Successful Over Time",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "recipe-make-customers-successful.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 89
+    },
+    {
+      "id": "recipe-optimize-existing-product",
+      "title": "Optimize an Existing Product",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "recipe-optimize-existing-product.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 80
+    },
+    {
+      "id": "workflow-cancellation-interviews",
+      "title": "Cancellation Interviews",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-cancellation-interviews.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 214
+    },
+    {
+      "id": "workflow-compare-competing-solutions",
+      "title": "Compare Competing Solutions",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-compare-competing-solutions.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 225
+    },
+    {
+      "id": "workflow-conduct-jobs-interviews",
+      "title": "Conduct Jobs Interviews",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-conduct-jobs-interviews.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 289
+    },
+    {
+      "id": "workflow-conduct-jtbd-interview-moesta",
+      "title": "How to Conduct a JTBD Interview",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-conduct-jtbd-interview-moesta.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 510
+    },
+    {
+      "id": "workflow-create-development-roadmap",
+      "title": "Create a Development Roadmap",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-create-development-roadmap.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 202
+    },
+    {
+      "id": "workflow-create-goal-based-personas",
+      "title": "Create Goal-Based Personas",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-create-goal-based-personas.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 199
+    },
+    {
+      "id": "workflow-create-job-map",
+      "title": "Create a Job Map",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-create-job-map.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 257
+    },
+    {
+      "id": "workflow-create-job-stories",
+      "title": "Create Job Stories",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-create-job-stories.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 244
+    },
+    {
+      "id": "workflow-define-value-proposition",
+      "title": "Define Value Proposition",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-define-value-proposition.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 206
+    },
+    {
+      "id": "workflow-find-underserved-needs",
+      "title": "Find Underserved Needs (ODI)",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-find-underserved-needs.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 260
+    },
+    {
+      "id": "workflow-five-progress-tools",
+      "title": "The Five Progress Tools",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-five-progress-tools.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 384
+    },
+    {
+      "id": "workflow-four-forces-analysis",
+      "title": "Four Forces Analysis",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-four-forces-analysis.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 200
+    },
+    {
+      "id": "workflow-getting-started-demand-side",
+      "title": "Getting Started with Demand-Side Sales",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-getting-started-demand-side.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 279
+    },
+    {
+      "id": "workflow-map-buying-timeline",
+      "title": "How to Map a Customer's Buying Timeline",
+      "authors": [
+        "Bob Moesta"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-map-buying-timeline.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 294
+    },
+    {
+      "id": "workflow-organize-around-jobs",
+      "title": "Organize Around Jobs",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-organize-around-jobs.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 185
+    },
+    {
+      "id": "workflow-run-switch-interviews",
+      "title": "Run Switch Interviews",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-run-switch-interviews.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 245
+    },
+    {
+      "id": "workflow-survive-disruption",
+      "title": "Survive Disruption",
+      "authors": [
+        "Jim Kalbach"
+      ],
+      "year": 2020,
+      "type": "guide",
+      "description": "",
+      "path": "workflow-survive-disruption.md",
+      "format": "markdown",
+      "license": "Private (copyrighted)",
+      "verified": true,
+      "priority": "primary",
+      "topics": [],
+      "word_count": 184
+    }
+  ]
+}

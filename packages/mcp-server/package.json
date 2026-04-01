@@ -1,0 +1,24 @@
+{
+  "name": "@avatar-sdk/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for Avatar SDK — query avatar corpora via semantic search",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "avatar-mcp-server": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@supabase/supabase-js": "^2.47.0",
+    "openai": "^4.77.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}

@@ -1,5 +1,6 @@
-import { loadAvatarConfig, loadSources, filterSources, getVectorStoreConfig } from './config.js';
+import { loadAvatarConfig, loadSources, filterSources, getVectorStoreConfig, resolveCorpusRoot } from './config.js';
 import { extractPdf } from './extract.js';
+import { extractMarkdown } from './extract-markdown.js';
 import { chunkDocument } from './chunk.js';
 import { embedChunks } from './embed.js';
 import {
@@ -100,7 +101,11 @@ async function main(): Promise<void> {
 
   // Filter sources
   const sources = filterSources(manifest, sourceId);
+  const corpusRoot = resolveCorpusRoot(avatarId, manifest);
   log.stat('Sources to process', sources.length);
+  if (corpusRoot) {
+    log.stat('Corpus root', corpusRoot);
+  }
 
   let totalChunks = 0;
   let totalTokens = 0;
@@ -120,9 +125,18 @@ async function main(): Promise<void> {
       }
     }
 
-    // Extract
-    log.info('Extracting text from PDF...');
-    const extraction = await extractPdf(avatarId, source);
+    // Extract based on format
+    let extraction;
+    if (source.format === 'markdown') {
+      if (!corpusRoot) {
+        throw new Error(`Markdown source "${source.id}" requires corpus_root in sources.json`);
+      }
+      log.info('Extracting text from markdown...');
+      extraction = await extractMarkdown(source, corpusRoot);
+    } else {
+      log.info('Extracting text from PDF...');
+      extraction = await extractPdf(avatarId, source);
+    }
     log.stat('Pages extracted', extraction.pages.length);
     log.stat('Characters', extraction.totalChars.toLocaleString());
 

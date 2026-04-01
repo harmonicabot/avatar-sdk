@@ -46,17 +46,27 @@ export function filterSources(
   sourceId?: string,
 ): SourceDocument[] {
   let sources = manifest.sources.filter(
-    (s) => s.priority === 'primary' && s.format === 'PDF',
+    (s) => s.priority === 'primary' && (s.format === 'PDF' || s.format === 'markdown'),
   );
 
   if (sourceId) {
     sources = sources.filter((s) => s.id === sourceId);
     if (sources.length === 0) {
       throw new Error(
-        `Source "${sourceId}" not found or not a primary PDF source`,
+        `Source "${sourceId}" not found or not a primary source`,
       );
     }
   }
 
   return sources;
+}
+
+/**
+ * Resolve the corpus root for avatars with external markdown corpora.
+ * If sources.json has a corpus_root field, resolve it relative to the avatar's corpus directory.
+ */
+export function resolveCorpusRoot(avatarId: string, manifest: SourcesManifest): string | null {
+  const corpusRoot = (manifest as SourcesManifest & { corpus_root?: string }).corpus_root;
+  if (!corpusRoot) return null;
+  return resolve(avatarDir(avatarId), 'corpus', corpusRoot);
 }

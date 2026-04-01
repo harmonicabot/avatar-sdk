@@ -40,13 +40,15 @@ export interface SourceDocument {
   year: number;
   type: string;
   description: string;
-  url: string;
+  url?: string;
+  path?: string;
   archive_url?: string;
   license: string;
   format: string;
   verified: boolean;
   priority: 'primary' | 'secondary';
   topics: string[];
+  word_count?: number;
   doi?: string;
   hdl?: string;
   journal?: string;
@@ -58,6 +60,7 @@ export interface SourcesManifest {
   avatar: string;
   corpus_description: string;
   last_updated: string;
+  corpus_root?: string;
   sources: SourceDocument[];
 }
 
