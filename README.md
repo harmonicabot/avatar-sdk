@@ -50,25 +50,25 @@ When a topic arises in conversation, the avatar:
 
 ## Current Avatars
 
-### Elinor Ostrom
+### Ostrom's Corpus
 
-Nobel laureate in economics, studied how communities successfully self-govern common resources.
+Elinor Ostrom won a Nobel prize in economics for studying how communities successfully self-govern common resources.
 
 **Corpus:** 352 chunks across 3 documents (academic papers, textbook)
 - *Sustaining the Commons* (Anderies & Janssen, 2016)
 - *Beyond Markets and States* (Ostrom, 2009) — Nobel Prize lecture
 - *Updated Guide to IAD* (McGinnis, 2011)
 
-### Lenny Rachitsky
+### Lenny's Corpus
 
-Product management advisor, author of [Lenny's Newsletter](https://www.lennysnewsletter.com/).
+Lenny Rachitsky is the author of [Lenny's Newsletter](https://www.lennysnewsletter.com/).
 
 **Corpus:** 5,003 chunks across 349 newsletter posts (2019-2025)
 - Product management, growth strategy, retention benchmarks
 - B2B/B2C, marketplace dynamics, hiring, pricing
 - Guest contributor insights attributed to their original source
 
-Built for [Lenny's Data Challenge](https://www.lennysnewsletter.com/p/build-something-with-my-data). Try it: [@lennys_avatar_bot](https://t.me/lennys_avatar_bot) on Telegram.
+Built for Lenny's MCP server. Try it: [@lennys_avatar_bot](https://t.me/lennys_avatar_bot) on Telegram.
 
 ## Architecture
 
