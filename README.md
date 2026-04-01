@@ -240,12 +240,3 @@ MIT License — See [LICENSE](./LICENSE)
 
 To report a vulnerability, see [SECURITY.md](./SECURITY.md).
 
-## Links
-
-- [Protocol Specification](./packages/core/mcp-spec.md)
-- [Harmonica](https://harmonica.chat) — Primary integration platform
-- [Lenny's Data Challenge](https://www.lennysnewsletter.com/p/build-something-with-my-data) — What inspired the Lenny avatar
-
----
-
-*"Like having a diligent student in your conversation — one who can quickly find relevant passages and offer interpretations grounded in the actual writings."*
