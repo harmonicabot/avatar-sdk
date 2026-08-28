@@ -1,5 +1,7 @@
 # Contributing to Avatar SDK
 
+> **Scope:** This is a Harmonica-owned implementation and historical learning surface, not the canonical CAP SDK. Its MCP-based protocol material is non-normative. Future contributions should support Harmonica integrations or experiments.
+
 Thanks for your interest in contributing! This guide will help you get started.
 
 ## Development Setup
@@ -46,7 +48,7 @@ npm run lint
 - **Add corpus sources** — Find open-access documents for existing avatars
 - **Create new avatars** — Follow the guide in [README.md](./README.md#architecture)
 - **Improve the processor** — Better chunking, extraction, or embedding strategies
-- **Build integrations** — Platform integrations using the CAP protocol
+- **Build integrations** — Harmonica avatar integrations and experiments
 - **Documentation** — Improve docs, add examples, fix typos
 - **Report bugs** — Open an issue with reproduction steps
 
@@ -60,7 +62,7 @@ npm run lint
 ## Project Structure
 
 ```
-packages/core/       — Protocol specification (schema, MCP spec)
+packages/core/       — Historical protocol assets and avatar schema
 packages/processor/  — Corpus processing pipeline
 avatars/             — Avatar configurations and corpus metadata
 supabase/            — Database schema

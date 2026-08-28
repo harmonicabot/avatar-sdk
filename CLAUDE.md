@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Avatar SDK** — infrastructure for building knowledge avatars grounded in verified source documents. Avatars are AI agents that serve as "students" of thinkers and authors, participating in conversations with cited, grounded responses. Works for both historical figures (Elinor Ostrom) and living authors (Lenny Rachitsky).
 
-**Conversational Avatar Protocol (CAP)** — open standard (built on MCP) for deploying avatars on any platform. Primary integration: Harmonica.
+**Ownership boundary (2026-08-28)** - This is a Harmonica-owned implementation and historical learning surface. Its MCP-based CAP material is non-normative and does not define the canonical protocol. Current public pre-spec incubation lives in [Citizen-Infra/conversational-avatar-protocol](https://github.com/Citizen-Infra/conversational-avatar-protocol). Future active work here should serve Harmonica integrations or experiments; do not promote this repository into a platform-neutral CAP SDK.
 
 ## Commands
 
@@ -35,7 +35,7 @@ node --env-file=.env --import tsx packages/processor/src/index.ts --avatar <id> 
 
 Turbo monorepo (`packages/*` + `avatars/*` workspaces).
 
-- **`packages/core/`** — Protocol specification: `avatar-schema.json` (JSON Schema for config), `mcp-spec.md` (MCP tools spec)
+- **`packages/core/`** — Historical protocol assets and avatar schema: `avatar-schema.json` (JSON Schema for config), `mcp-spec.md` (MCP tools spec)
 - **`packages/processor/`** — Corpus pipeline: source → extract → chunk → embed → store. Supports both PDF (`extract.ts` via pdf-parse) and markdown (`extract-markdown.ts`, strips YAML frontmatter). Sentence-boundary-aware chunking (`gpt-tokenizer`), OpenAI batched embeddings, Supabase pgvector storage. Config-driven from avatar's `config.json` vectorStore settings.
 - **`packages/mcp-server/`** — Reference MCP server implementing `query_corpus`, `generate_response`, `get_avatar_info`. Uses Server class from SDK v1. Queries Supabase `search_avatar_chunks` RPC. Built but not deployed — current consumers (Telegram bots) query Supabase directly.
 - **`avatars/elinor-ostrom/`** — First avatar (historical). `config.json` defines persona + vectorStore config, `corpus/sources.json` has source metadata + URLs, `corpus/open-access/` holds downloaded PDFs (gitignored). 352 chunks across 3 documents.
