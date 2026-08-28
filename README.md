@@ -1,6 +1,9 @@
 # Avatar SDK
 
-> **Status: Alpha (v0.1.0)** — Under active development. APIs may change.
+> **Status: Historical alpha (v0.1.0)** - Harmonica-owned implementation and learning surface. APIs may change.
+
+> [!IMPORTANT]
+> This repository does not define the canonical Conversational Avatar Protocol (CAP). Its protocol documents record an early MCP-based proposal and are non-normative. CAP is now in [pre-spec incubation under Citizen Infra](https://github.com/Citizen-Infra/conversational-avatar-protocol). Future active work in this repository is scoped to Harmonica integrations and experiments; a cross-platform CAP SDK would be a separate, evidence-led project.
 
 Infrastructure for building knowledge avatars grounded in verified source documents.
 
@@ -16,14 +19,15 @@ Avatar SDK provides the tools to create **knowledge avatars** — AI agents that
 
 ## What is the Conversational Avatar Protocol (CAP)?
 
-**CAP** is an open standard that allows avatars built with the SDK to be deployed on any platform that supports the protocol. While traditional chatbots answer isolated queries, CAP-compliant avatars participate in ongoing group conversations.
+The CAP material in this repository records an early proposal for conversation-aware avatars built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/). It is historical implementation material, not the current protocol definition or a conformance claim.
 
 | Component | What it does |
 |-----------|--------------|
-| **Avatar SDK** | Build avatars: process corpora, generate embeddings, define personas |
-| **CAP** | Deploy avatars: standard interface for platforms to integrate avatars |
+| **Avatar SDK** | Harmonica-owned corpus, retrieval, persona, and integration experiments |
+| **CAP material in this repository** | Historical MCP-based proposal; non-normative |
+| **Citizen Infra CAP repository** | Current public pre-spec incubation and pilot-evidence surface |
 
-Built on [MCP (Model Context Protocol)](https://modelcontextprotocol.io/), CAP enables platforms like Harmonica to integrate knowledge avatars into community conversations.
+The SDK may inform or implement a future Harmonica CAP binding, but its current storage, model, corpus, persona, and MCP choices are not CAP requirements.
 
 ## The Conversational Difference
 
@@ -75,7 +79,7 @@ Built for Lenny's MCP server. Try it: [@lennys_avatar_bot](https://t.me/lennys_a
 ```
 avatar-sdk/
 ├── packages/
-│   ├── core/                    # Protocol specification
+│   ├── core/                    # Historical protocol assets and avatar schema
 │   │   ├── avatar-schema.json   # JSON Schema for avatar configs
 │   │   └── mcp-spec.md         # MCP tools specification
 │   │
@@ -229,7 +233,7 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guideline
 
 - Add documents to official avatar corpora
 - Create new avatar configurations
-- Build platform integrations
+- Build Harmonica integrations
 - Improve processing pipeline
 
 ## License
