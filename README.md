@@ -54,7 +54,9 @@ When a topic arises in conversation, the avatar:
 
 ## Provenance: current state
 
-**Retrieval is recorded; attribution is not.** "How It Works" above describes the design intent. This section describes what the code does, because the two differ in a way that matters to anyone relying on a citation. Verified 2026-09-21 against `packages/mcp-server/src/index.ts` and the `lenny-avatar-bot` and `jtbd-avatar-bot` sources.
+**Retrieval is recorded; attribution is not.** "How It Works" above describes the design intent. This section describes what the reference implementation does, because the two differ in a way that matters to anyone relying on a citation. Verified 2026-09-21 against `packages/mcp-server/src/index.ts`, `packages/core/mcp-spec.md` and `docs/protocol.md`.
+
+**Scope.** This is about the avatar model this repository describes: source-grounded entities meant to take part in deliberation on platforms that support CAP. The Telegram bots listed under Current Avatars are simple question-answering bots that share this repository's corpus and retrieval layer. They are not implementations of that model, so their prompt design and output format are product choices for those bots and say nothing about how an avatar here should behave.
 
 ### What is a record
 
@@ -62,25 +64,23 @@ Which passages were available to a response. `query_corpus` returns each chunk w
 
 ### What is the model's claim
 
-Which passage supports which sentence. Nothing in this repository or its deployed consumers links a statement to the passage it rests on:
-
-- The reference server's `generate_response` does not generate a response. It returns a system prompt plus passages and leaves the answer, and its citations, to the calling LLM, instructed to "Cite sources by title".
-- The deployed Telegram bots query Supabase directly (the reference server is not deployed) and do the same thing in their own prompts. In both, the "📚 Sources" footer is written by the model from a prompt instruction; it is not appended from the retrieved set.
+Which passage supports which sentence. Nothing in the reference implementation links a statement to the passage it rests on. `generate_response` does not generate a response: it returns a system prompt plus passages and leaves the answer, and its citations, to the calling LLM, instructed to "Cite sources by title".
 
 So a citation is the model's account of its own output. It can name a passage that was not used, or leave out one that was, and nothing downstream can tell.
 
 ### Known gaps
 
 - **`generate_response` drops the page.** Its row type omits `source_page`, although `query_corpus` returns it. A citation can name a title, never a location.
-- **`docs/protocol.md` specifies an output that does not exist.** It shows `generate_response` returning `response` and `citations: [{source, page}]`. Neither field is implemented. That document is historical (see Ownership in `CLAUDE.md`), but a reader has no way to know the example is unimplemented.
-- **Lenny bot source links are searches, not sources.** Each passage is given to the model with a URL built by `titleToSearchUrl`, which is a newsletter search for the title rather than a link to the post.
-- **The abstention rule and the deployed prompt diverge.** `docs/protocol.md` says an avatar "must not invent positions on uncovered topics", and the bots do abstain when retrieval returns nothing. But when passages exist without directly answering, both bots are told to "bridge the gap" from related frameworks rather than say nothing relevant was found, being transparent about the connection. That is inference rather than invention, and a defensible product choice. It does mean the bridged answer, where a model-written citation is most likely to overstate its support, is the case the prompt steers toward.
+- **Both specs describe an output that does not exist.** `packages/core/mcp-spec.md` specifies `generate_response` as returning `response`, `citations: [{source, page, quote}]` and `confidence`; `docs/protocol.md` shows `response` and `citations: [{source, page}]`. None of these fields is implemented. Both documents are historical (see Ownership in `CLAUDE.md`), but a reader has no way to know the examples are unimplemented. The `confidence` field in particular should not be implemented as specified: it is model-reported confidence, which the CAP evidence-envelope candidate linked below rejects.
+- **The similarity threshold is inconsistent.** `query_corpus` advertises a default of 0.3 in its input schema but falls back to 0.7 when the argument is omitted, and `generate_response` hardcodes 0.65 with no parameter.
 
 ### Why it matters, and what would fix it
 
 Asking a model to justify its own output produces a new prediction rather than an account of how the output was made (Théophile Pénigaud, ["Orphan Reasons"](https://informationaldemocracy.substack.com/p/orphan-reasons-who-is-responsible), Informational Democracy, 2026-09-01). A citation written by the model in the same pass is that kind of justification.
 
-The fix is structural rather than a better prompt: derive citations from the retrieval record and return them alongside the text, instead of asking the model to write them into it. [`Citizen-Infra/conversational-avatar-protocol#4`](https://github.com/Citizen-Infra/conversational-avatar-protocol/issues/4) proposes exactly that separation for CAP, with model-reported confidence explicitly rejected. This repository is the concrete case that motivates it.
+The fix is structural rather than a better prompt: derive citations from the retrieval record and return them alongside the text, instead of asking the model to write them into it. [`Citizen-Infra/conversational-avatar-protocol#4`](https://github.com/Citizen-Infra/conversational-avatar-protocol/issues/4) proposes exactly that separation for CAP, with model-reported confidence explicitly rejected. The reference server here is a concrete case of the gap it addresses.
+
+*Revised 2026-09-21: the first version of this section treated the two Telegram bots as deployed consumers of the avatar model and listed gaps in their prompts. They are separate, simpler products; those points were removed.*
 
 ## Current Avatars
 
