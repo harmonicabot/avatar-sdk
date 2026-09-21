@@ -52,6 +52,36 @@ When a topic arises in conversation, the avatar:
 3. Cites the expert directly with post/paper titles
 4. Speaks in its own voice as a student making sense of the material
 
+## Provenance: current state
+
+**Retrieval is recorded; attribution is not.** "How It Works" above describes the design intent. This section describes what the code does, because the two differ in a way that matters to anyone relying on a citation. Verified 2026-09-21 against `packages/mcp-server/src/index.ts` and the `lenny-avatar-bot` and `jtbd-avatar-bot` sources.
+
+### What is a record
+
+Which passages were available to a response. `query_corpus` returns each chunk with `source_title`, `source_page` and `source_year`, and `generate_response` returns the `retrieved_passages` it supplied. That is deterministic and reproducible from the query.
+
+### What is the model's claim
+
+Which passage supports which sentence. Nothing in this repository or its deployed consumers links a statement to the passage it rests on:
+
+- The reference server's `generate_response` does not generate a response. It returns a system prompt plus passages and leaves the answer, and its citations, to the calling LLM, instructed to "Cite sources by title".
+- The deployed Telegram bots query Supabase directly (the reference server is not deployed) and do the same thing in their own prompts. In both, the "📚 Sources" footer is written by the model from a prompt instruction; it is not appended from the retrieved set.
+
+So a citation is the model's account of its own output. It can name a passage that was not used, or leave out one that was, and nothing downstream can tell.
+
+### Known gaps
+
+- **`generate_response` drops the page.** Its row type omits `source_page`, although `query_corpus` returns it. A citation can name a title, never a location.
+- **`docs/protocol.md` specifies an output that does not exist.** It shows `generate_response` returning `response` and `citations: [{source, page}]`. Neither field is implemented. That document is historical (see Ownership in `CLAUDE.md`), but a reader has no way to know the example is unimplemented.
+- **Lenny bot source links are searches, not sources.** Each passage is given to the model with a URL built by `titleToSearchUrl`, which is a newsletter search for the title rather than a link to the post.
+- **The abstention rule and the deployed prompt diverge.** `docs/protocol.md` says an avatar "must not invent positions on uncovered topics", and the bots do abstain when retrieval returns nothing. But when passages exist without directly answering, both bots are told to "bridge the gap" from related frameworks rather than say nothing relevant was found, being transparent about the connection. That is inference rather than invention, and a defensible product choice. It does mean the bridged answer, where a model-written citation is most likely to overstate its support, is the case the prompt steers toward.
+
+### Why it matters, and what would fix it
+
+Asking a model to justify its own output produces a new prediction rather than an account of how the output was made (Théophile Pénigaud, ["Orphan Reasons"](https://informationaldemocracy.substack.com/p/orphan-reasons-who-is-responsible), Informational Democracy, 2026-09-01). A citation written by the model in the same pass is that kind of justification.
+
+The fix is structural rather than a better prompt: derive citations from the retrieval record and return them alongside the text, instead of asking the model to write them into it. [`Citizen-Infra/conversational-avatar-protocol#4`](https://github.com/Citizen-Infra/conversational-avatar-protocol/issues/4) proposes exactly that separation for CAP, with model-reported confidence explicitly rejected. This repository is the concrete case that motivates it.
+
 ## Current Avatars
 
 ### Ostrom's Corpus
